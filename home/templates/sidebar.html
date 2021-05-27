@@ -1,6 +1,6 @@
 {% load static %}
 <!-- Hero Section Begin -->
-    {% if page %}
+{% if page %}
     <section class="hero">
         <div class="container">
             <div class="row">
@@ -11,7 +11,20 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
+                            {% load mptt_tags %}
+                            {% recursetree category %}
+                                <li>
+
+                                    <a href="/category/{{ node.slug }}">{{ node.title }}</a>
+                                    {% if not node.is_leaf_node %}
+                                        <ul>
+                                            {{ children }}
+                                        </ul>
+                                    {% endif %}
+
+                                </li>
+                            {% endrecursetree %}
+                            <li><a href="#">Fresh Meat</a>
                             <li><a href="#">Vegetables</a></li>
                             <li><a href="#">Fruit & Nut Gifts</a></li>
                             <li><a href="#">Fresh Berries</a></li>
@@ -20,8 +33,6 @@
                             <li><a href="#">Fastfood</a></li>
                             <li><a href="#">Fresh Onion</a></li>
                             <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,8 +70,8 @@
             </div>
         </div>
     </section>
-    {% else %}
-<section class="hero hero-normal">
+{% else %}
+    <section class="hero hero-normal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -110,5 +121,5 @@
             </div>
         </div>
     </section>
-    {% endif %}
-    <!-- Hero Section End -->
+{% endif %}
+<!-- Hero Section End -->
