@@ -10,30 +10,23 @@
                             <i class="fa fa-bars"></i>
                             <span>All departments</span>
                         </div>
-                        <ul>
-                            {% load mptt_tags %}
-                            {% recursetree category %}
-                                <li>
-
-                                    <a href="/category/{{ node.slug }}">{{ node.title }}</a>
-                                    {% if not node.is_leaf_node %}
-                                        <ul>
-                                            {{ children }}
-                                        </ul>
-                                    {% endif %}
-
-                                </li>
-                            {% endrecursetree %}
-                            <li><a href="#">Fresh Meat</a>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                        </ul>
+                        <nav class="header__menu">
+                            <ul>
+                                {% load mptt_tags %}
+                                {% recursetree category %}
+                                    <li>
+                                        <a href="/category/{{ node.slug }}">{{ node.title }}</a>
+                                        {% if not node.is_leaf_node %}
+                                            <ul class="header__menu__dropdown">
+                                                <li>
+                                                    {{ children }}
+                                                </li>
+                                            </ul>
+                                        {% endif %}
+                                    </li>
+                                {% endrecursetree %}
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 <div class="col-lg-9">
