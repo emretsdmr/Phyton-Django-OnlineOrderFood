@@ -69,3 +69,13 @@ def category_products(request,id,slug):
              'categorydata':categorydata
              }
     return render(request, 'products.html',context)
+
+def product_detail(request,id,slug):
+    category = Category.objects.all()
+    categorydata = Category.objects.get(pk=id)
+    product = Product.objects.get(pk=id)
+    context = {'category': category,
+               'categorydata': categorydata,
+               'product': product,
+               }
+    return render(request, 'product_detail.html',context)
