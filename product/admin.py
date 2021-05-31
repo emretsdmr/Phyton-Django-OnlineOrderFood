@@ -15,7 +15,7 @@ class CategoryAdmin(MPTTModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display=['title','category','price','amount','image_tag','status']
+    list_display=['title','category','restaurant','price','amount','image_tag','status']
     readonly_fields = ('image_tag',)
     list_filter=['status','category']
     inlines=[ProductImageInline]

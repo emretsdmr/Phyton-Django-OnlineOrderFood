@@ -83,3 +83,13 @@ def restaurants(request):
     context = {'restaurant': restaurant,
                }
     return render(request, 'restaurants.html', context)
+
+def restaurant_products(request,id):
+    setting = Setting.objects.get(pk=1)
+    restaurant = Restaurant.objects.get(pk=id)
+    products=Product.objects.filter(restaurant_id=id)
+    context={'setting':setting,
+             'products':products,
+             'restaurant':restaurant
+             }
+    return render(request, 'restaurant_products.html',context)
