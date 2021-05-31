@@ -60,4 +60,3 @@ class ContactFormu(ModelForm):
     class Meta:
         model=ContactFormMessage
         fields=['name','email','subject','message']
-
