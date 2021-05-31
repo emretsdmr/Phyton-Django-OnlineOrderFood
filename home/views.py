@@ -11,12 +11,19 @@ def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Product.objects.all()[:4]
     category=Category.objects.all()
+    dayproducts=Product.objects.all()[:4]
+    lastproducts=Product.objects.all().order_by('-id')[:4]
+    randomproducts=Product.objects.all().order_by('?')[:4]
+
 
     context={
         'setting':setting,
         'category':category,
         'page': 'home',
-        'sliderdata':sliderdata
+        'sliderdata':sliderdata,
+        'dayproducts':dayproducts,
+        'lastproducts':lastproducts,
+        'randomproducts':randomproducts
     }
     return render(request, 'index.html', context)
 
