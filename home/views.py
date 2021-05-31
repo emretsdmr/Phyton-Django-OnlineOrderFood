@@ -50,3 +50,15 @@ def iletisim(request):
     form= ContactFormu()
     context={'setting':setting,'form':form}
     return render(request, 'iletisim.html', context)
+
+def category_products(request,id,slug):
+    setting = Setting.objects.get(pk=1)
+    categorydata = Category.objects.get(pk=id)
+    category=Category.objects.all()
+    products=Product.objects.filter(category_id=id)
+    context={'setting':setting,
+             'category':category,
+             'products':products,
+             'categorydata':categorydata
+             }
+    return render(request, 'products.html',context)
