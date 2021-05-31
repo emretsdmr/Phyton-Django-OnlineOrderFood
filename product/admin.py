@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.utils.html import format_html
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 # Register your models here.
-from product.models import Category, Product, Images
+from product.models import Category, Product, Images, Restaurant
+
 
 class ProductImageInline(admin.TabularInline):
     model=Images
@@ -18,6 +19,11 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
     list_filter=['status','category']
     inlines=[ProductImageInline]
+
+class RestaurantAdmin(admin.ModelAdmin):
+    list_display=['title','type','image_tag','status']
+    readonly_fields = ('image_tag',)
+    list_filter=['status']
 
 class CategoryAdmin2(DraggableMPTTAdmin):
     mptt_indent_field = "title"
@@ -58,4 +64,5 @@ class ImagesAdmin(admin.ModelAdmin):
 
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Product,ProductAdmin)
+admin.site.register(Restaurant,RestaurantAdmin)
 admin.site.register(Images,ImagesAdmin)

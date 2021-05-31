@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 from home.models import Setting, ContactFormu
-from product.models import Product, Category
+from product.models import Product, Category, Restaurant
 
 
 def index(request):
@@ -72,10 +72,14 @@ def category_products(request,id,slug):
 
 def product_detail(request,id,slug):
     category = Category.objects.all()
-    categorydata = Category.objects.get(pk=id)
     product = Product.objects.get(pk=id)
     context = {'category': category,
-               'categorydata': categorydata,
                'product': product,
                }
     return render(request, 'product_detail.html',context)
+
+def restaurants(request):
+    restaurant = Restaurant.objects.all()
+    context = {'restaurant': restaurant,
+               }
+    return render(request, 'restaurants.html', context)
