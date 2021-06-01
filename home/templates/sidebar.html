@@ -1,4 +1,7 @@
 {% load static %}
+
+
+
 <!-- Hero Section Begin -->
 {% if page %}
     <section class="hero">
@@ -29,12 +32,29 @@
                         </nav>
                     </div>
                 </div>
+                <script>
+                    $(function(){
+                        $("#query").autocomplete({
+                            source: "/search_auto/",
+                            select: function (event, ui) { //item selected
+                                AutoCompleteSelectHandler(event, ui)
+                            },
+                            minLength: 2,
+                        });
+                    });
+
+                    function AutoCompleteSelectHandler(event, ui)
+                    {
+                        var selectedObj = ui.item;
+                    }
+
+                </script>
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="/search/" method="post">
                                 {% csrf_token %}
-                                <input name="query" placeholder="Neye ihtiyacınız var?">
+                                <input id="query" name="query" placeholder="Neye ihtiyacınız var?">
                                 <button type="submit" class="site-btn">ARAMA</button>
                             </form>
                         </div>

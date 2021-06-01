@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
@@ -106,6 +108,7 @@ def product_search(request):
             category = Category.objects.all()
             query = form.cleaned_data['query']
             products = Product.objects.filter(title__icontains=query)
+
             #return HttpResponse(products)
             context = {'products' : products,
                        'category' : category,
@@ -113,3 +116,18 @@ def product_search(request):
             return render(request,'products_search.html',context)
 
     return HttpResponseRedirect('/')
+
+def product_search_auto(request):
+    if request.is_ajax():
+        q = request.GET.get('term','')
+        product = Product.objects.filter(title__icontains=q)
+        results = []
+        for rs in product:
+            product_json = {}
+            product_json = rs.title
+            results.append(product_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data,mimetype)

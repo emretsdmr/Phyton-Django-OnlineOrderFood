@@ -34,6 +34,7 @@ urlpatterns = [
     path('restaurants/', views.restaurants ,name='restaurants'),
     path('restaurant-products/<int:id>/', views.restaurant_products,name='restaurant_products'),
     path('search/',views.product_search,name='product_search'),
+    path('search_auto/',views.product_search_auto,name='product_search_auto'),
 ]
 if settings.DEBUG: # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

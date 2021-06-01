@@ -24,16 +24,22 @@
     <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
 
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
     {% block head %}    {% endblock %}
 </head>
 <body>
-    {% include 'header.html' %}
-    {% block sidebar %}    {% endblock %}
-    {% block slider %}    {% endblock %}
-    {% block content %}    {% endblock %}
-    {% block body %}    {% endblock %}
-    {% include 'footer.html' %}
-    {% block footer %}    {% endblock %}
+{% include 'header.html' %}
+{% block sidebar %}    {% endblock %}
+{% block slider %}    {% endblock %}
+{% block content %}    {% endblock %}
+{% block body %}    {% endblock %}
+{% include 'footer.html' %}
+{% block footer %}    {% endblock %}
 
 
 </body>
