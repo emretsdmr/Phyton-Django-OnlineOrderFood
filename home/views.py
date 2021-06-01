@@ -1,7 +1,9 @@
 import json
 
-from django.shortcuts import render
 from django.contrib import messages
+from django.contrib.auth import logout, login, authenticate
+from django.shortcuts import render
+
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
@@ -86,8 +88,10 @@ def product_detail(request,id,slug):
     return render(request, 'product_detail.html',context)
 
 def restaurants(request):
+    setting = Setting.objects.get(pk=1)
     restaurant = Restaurant.objects.all()
-    context = {'restaurant': restaurant,
+    context = {'setting':setting,
+               'restaurant': restaurant,
                }
     return render(request, 'restaurants.html', context)
 
@@ -131,3 +135,24 @@ def product_search_auto(request):
         data = 'fail'
     mimetype = 'application/json'
     return HttpResponse(data,mimetype)
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            messages.warning(request, 'Hatalı giriş!')
+            return HttpResponseRedirect('/login')
+
+    category = Category.objects.all()
+    context = {'category': category,
+               }
+    return render(request, 'login.html', context)

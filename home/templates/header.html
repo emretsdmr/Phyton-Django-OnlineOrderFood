@@ -29,8 +29,16 @@
                                 <li><a href="#">English</a></li>
                             </ul>
                         </div>
-                        <div class="header__top__right__auth">
-                            <a href="#"><i class="fa fa-user"></i> Login</a>
+                        <div class="header__top__right__language">
+                            {% if user.id is not None %}
+                                <i class="fa fa-user"></i> {{ user.first_name }}
+                                <ul>
+                                    <li><a href="#"> Profil </a></li>
+                                    <li><a href="/logout/"> Çıkış </a></li>
+                                </ul>
+                            {% else %}
+                                <a href="/login/"><i class="fa fa-user"></i> Giriş / <a href="/join/">Kaydol</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
