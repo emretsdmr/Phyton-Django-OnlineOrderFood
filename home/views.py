@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
+from home.forms import SearchForm
 from home.models import Setting, ContactFormu
 from product.models import Product, Category, Restaurant, Comment
 
@@ -13,7 +14,7 @@ def index(request):
     category=Category.objects.all()
     dayproducts=Product.objects.all()[:4]
     lastproducts=Product.objects.all().order_by('-id')[:4]
-    randomproducts=Product.objects.all().order_by('?')[:4]
+    randomrestaurants=Restaurant.objects.all().order_by('?')[:4]
 
 
     context={
@@ -23,7 +24,7 @@ def index(request):
         'sliderdata':sliderdata,
         'dayproducts':dayproducts,
         'lastproducts':lastproducts,
-        'randomproducts':randomproducts
+        'randomrestaurants':randomrestaurants
     }
     return render(request, 'index.html', context)
 
@@ -97,3 +98,18 @@ def restaurant_products(request,id):
              'restaurant':restaurant
              }
     return render(request, 'restaurant_products.html',context)
+
+def product_search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            products = Product.objects.filter(title__icontains=query)
+            #return HttpResponse(products)
+            context = {'products' : products,
+                       'category' : category,
+                       }
+            return render(request,'products_search.html',context)
+
+    return HttpResponseRedirect('/')
