@@ -31,9 +31,9 @@
                         </div>
                         <div class="header__top__right__language">
                             {% if user.id is not None %}
-                                <i class="fa fa-user"></i> {{ user.first_name }}
+                                <i class="fa fa-user"></i> [{{ user.username }}]
                                 <ul>
-                                    <li><a href="#"> Profil </a></li>
+                                    <li><a href="/user/"> Profil </a></li>
                                     <li><a href="/logout/"> Çıkış </a></li>
                                 </ul>
                             {% else %}
