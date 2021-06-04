@@ -37,6 +37,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-5">
+                    <br><br>
                     {% include "user_panel.html" %}
                 </div>
                 <div class="col-lg-9 col-md-7">
@@ -45,30 +46,30 @@
                         <table>
                             <thead>
                             <tr>
-                                <th class="shoping__product">Kullanıcı</th>
-                                <th>E-Mail</th>
-                                <th>Telefon</th>
-                                <th>Yetki</th>
+                                <th class="shoping__product">Profil Fotoğrafı</th>
+                                <td><img src="{{ profile.image.url }}" height="150px" width="150px"></td>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="{{ profile.image.url }}" height="150px" width="150px" alt="">
-                                    <h5>
-                                        {{profile.user_name}}</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    {{ profile.user.email }}
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    {{ profile.phone }}
-                                </td>
-                                <td class="shoping__cart__total">
+                                <th class="text-left">Kullanıcı Adı</th>
+                                <td>{{profile.user_name}}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-left">E-Mail</th>
+                                <td>{{profile.user.email}}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-left">Telefon</th>
+                                <td>{{ profile.phone }}</td>
+                            </tr>
+                            <tr>
+                                 <th class="text-left">Yetki</th>
+                                <td>
                                     {% if user.is_staff == 1 %}
-                                    Admin
+                                        Admin
                                     {% else %}
-                                    Kullanıcı
+                                        Kullanıcı
                                     {% endif %}
                                 </td>
                             </tr>
