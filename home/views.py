@@ -97,11 +97,11 @@ def restaurants(request):
 
 def restaurant_products(request,id):
     setting = Setting.objects.get(pk=1)
-    restaurant = Restaurant.objects.get(pk=id)
-    products=Product.objects.filter(restaurant_id=id)
+    category = Category.objects.all()
+    products=Product.objects.filter(restaurant_id=id).order_by('category_id')
     context={'setting':setting,
              'products':products,
-             'restaurant':restaurant
+             'category':category
              }
     return render(request, 'restaurant_products.html',context)
 
