@@ -32,6 +32,8 @@
     </section>
     <!-- Breadcrumb Section End -->
 
+
+
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">
@@ -41,48 +43,27 @@
                     {% include "user_panel.html" %}
                 </div>
                 <div class="col-lg-9 col-md-7">
-
                     <div class="shoping__cart__table">
                         <table>
                             <thead>
                             <tr>
                                 <th class="shoping__product">Profil Fotoğrafı</th>
-                                <td><img src="{{ profile.image.url }}" height="150px" width="150px"></td>
+                                <td><img src="{{ user.userprofile.image.url }}" height="150px" width="150px"></td>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <th class="text-left">Kullanıcı Adı</th>
-                                <td>{{profile.user_name}}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-left">E-Mail</th>
-                                <td>{{profile.user.email}}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-left">Telefon</th>
-                                <td>{{ profile.phone }}</td>
-                            </tr>
-                            <tr>
-                                 <th class="text-left">Yetki</th>
-                                <td>
-                                    {% if user.is_staff == 1 %}
-                                        Admin
-                                    {% else %}
-                                        Kullanıcı
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                 <th><br><br><br>
-                                    <a href="/user/update" class="site-btn">Profili Güncelle</a>
-                                 </th>
-                                <th><br><br><br>
-                                    <a href="/user/password" class="site-btn">Şifreyi Güncelle</a>
-                                </th>
-                            </tr>
-                            </tbody>
+
                         </table>
+                        <form method="POST" enctype ="multipart/form-data">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                {{ user_form.as_p }}
+                                {{ profile_form.as_p }}
+                            </fieldset>
+                            <div class="form-group">
+                                <button type="submit" class="site-btn">Güncelle</button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
