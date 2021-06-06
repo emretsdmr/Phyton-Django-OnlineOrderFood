@@ -42,13 +42,13 @@
                     <div class="shoping__cart__table">
                         <table>
                             <thead>
-                                <tr>
-                                    <th class="shoping__product">Ürünler</th>
-                                    <th>Fiyat</th>
-                                    <th>Adet</th>
-                                    <th>Tutar</th>
-                                    <th></th>
-                                </tr>
+                            <tr>
+                                <th class="shoping__product">Ürünler</th>
+                                <th>Fiyat</th>
+                                <th>Adet</th>
+                                <th>Tutar</th>
+                                <th></th>
+                            </tr>
                             </thead>
                             <tbody>
                             {% for rs in schopcart %}
@@ -77,6 +77,11 @@
                             {% endfor %}
                             </tbody>
                         </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                                <a href="/order/orderproduct" class="primary-btn">Sipariş Ver</a>
+                        </div>
                     </div>
                 </div>
             </div>
