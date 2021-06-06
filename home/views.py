@@ -9,17 +9,19 @@ from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactFormu
+from order.models import ShopCart
 from product.models import Product, Category, Restaurant, Comment
 
 
 def index(request):
+    current_user = request.user
     setting = Setting.objects.get(pk=1)
     sliderdata = Product.objects.all()[:4]
     category=Category.objects.all()
     dayproducts=Product.objects.all()[:4]
     lastproducts=Product.objects.all().order_by('-id')[:4]
     randomrestaurants=Restaurant.objects.all().order_by('?')[:4]
-
+    request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
 
     context={
         'setting':setting,
