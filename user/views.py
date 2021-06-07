@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from home.models import UserProfile
+from order.models import Order, OrderProduct
 from product.models import Category
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
@@ -58,3 +60,27 @@ def change_password(request):
         return render(request,'change_password.html', {
             'form':form ,'category':category
         })
+
+@login_required(login_url='/login')
+def orders(request):
+    category = Category.objects.all()
+    current_user = request.user
+    profile = UserProfile.objects.get(user_id=current_user.id)
+    orders = Order.objects.filter(user_id=current_user.id)
+    context={'category':category,
+             'orders':orders,
+             'profile':profile
+             }
+    return render(request, "user_orders.html", context)
+
+@login_required(login_url='/login')
+def orderdetail(request,id):
+    category = Category.objects.all()
+    current_user = request.user
+    order = Order.objects.get(user_id=current_user.id, id=id)
+    orderitems = OrderProduct.objects.filter(order_id=id)
+    context = {'category': category,
+               'order': order,
+               'orderitems': orderitems
+               }
+    return render(request, "user_order_detail.html", context)
