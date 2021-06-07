@@ -1,0 +1,63 @@
+{% extends "homebase.html" %}
+
+{% block title %} Sıkça Sorulan Sorular - {{ setting.company }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Sıkça Sorulan Sorular</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Anasayfa</a>
+                            <span>Sıkça Sorulan Sorular</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    {% load static %}
+
+    <script>
+        $( function() {
+            $( "#accordion" ).accordion();
+        } );
+    </script>
+    <!-- Shoping Cart Section Begin -->
+    <section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <div id="accordion">
+                            {% for rs in faq %}
+                                <h3>{{ rs.question }}</h3>
+                                <div>
+                                    <p>
+                                        {{ rs.answer }}
+                                    </p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shoping Cart Section End -->
+{% endblock %}

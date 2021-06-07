@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 from home.forms import SearchForm, SignUpForm
-from home.models import Setting, ContactFormu
+from home.models import Setting, ContactFormu, FAQ
 from order.models import ShopCart
 from product.models import Product, Category, Restaurant, Comment
 
@@ -176,3 +176,13 @@ def signup_view(request):
                'form':form,
                }
     return render(request, 'signup.html', context)
+
+
+def faq(request):
+    category = Category.objects.all()
+    faq = FAQ.objects.all().order_by('ordernumber')
+    context = {
+        'category':category,
+        'faq':faq,
+    }
+    return render(request, 'faq.html',context)
